@@ -1,0 +1,128 @@
+// Simulador (Cuando presiona el botón "ejecutar el programa" se graban todos los cuadros de texto y se ejecuta el primero de la lista mostrando en una página el resultado.) 
+
+
+//Implementar con AJAX el concepto de autocompletar o también conocido como lista de sugerencias. A medida que tipiemos caracteres dentro de un control de tipo text mostrar un conjunto de palabras que comienzan con los caracteres ingresados hasta el momento.
+
+<html>
+<head>
+<title>Problema</title>
+<script languaje="javascript" src="funciones.js" type="text/javascript"></script>
+<link rel="StyleSheet" href="estilos.css" type="text/css">
+</head>
+<body>
+<form action="#">
+Ingrese una palabra que comience con a:<br>
+<input type="text" id="palabra" autocomplete="off"><br>
+<div id="resultados"></div>
+<input type="submit" value="buscar">
+</form>
+</body>
+</html>
+
+/////////////////////////////////////////////////////
+//estilo.css
+#resultados {
+  position:absolute;
+  background:#ff0;
+}
+/////////////////////////////////////////////////////
+.//funciones.js
+addEvent(window,'load',inicializarEventos,false);
+
+function inicializarEventos()
+{
+  var ob=document.getElementById('palabra');
+  addEvent(ob,'keyup',presionTecla,false);
+}
+
+var conexion1;
+function presionTecla(e)
+{
+  conexion1=crearXMLHttpRequest();
+  conexion1.onreadystatechange = procesarEventos;
+  palabra=document.getElementById('palabra').value;
+  conexion1.open('GET','pagina1.php?palabra='+palabra, true);
+  conexion1.send(null);
+}
+
+function procesarEventos()
+{
+  var resultados = document.getElementById("resultados");
+  if(conexion1.readyState == 4)
+  {
+    if (conexion1.status==200)
+    {
+      var xml = conexion1.responseXML;
+      var pals=xml.getElementsByTagName('palabra');
+      resultados.innerHTML='';      
+      for(f=0;f<pals.length;f++)
+      {
+        resultados.innerHTML = resultados.innerHTML + pals[f].firstChild.nodeValue + '<br>';
+      } 
+    }
+    else
+      alert(conexion1.statusText);
+  } 
+  else 
+  {
+    resultados.innerHTML = '<img src="../cargando.gif">';
+  }
+}
+
+
+//***************************************
+//Funciones comunes a todos los problemas
+//***************************************
+function addEvent(elemento,nomevento,funcion,captura)
+{
+  if (elemento.attachEvent)
+  {
+    elemento.attachEvent('on'+nomevento,funcion);
+    return true;
+  }
+  else  
+    if (elemento.addEventListener)
+    {
+      elemento.addEventListener(nomevento,funcion,captura);
+      return true;
+    }
+    else
+      return false;
+}
+
+function crearXMLHttpRequest() 
+{
+  var xmlHttp=null;
+  if (window.ActiveXObject) 
+    xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+  else 
+    if (window.XMLHttpRequest) 
+      xmlHttp = new XMLHttpRequest();
+  return xmlHttp;
+}
+////////////////////////////////////////////////////////
+//pagina1.php
+<?php
+$pal=$_REQUEST['palabra'];
+$vec=array('alma','algo','amo','aro','animo','arbol','abrir');
+if (strlen($pal)>0)
+{
+  for($f=0;$f<count($vec);$f++)
+  {
+    if ($pal==substr($vec[$f],0,strlen($pal)))
+      $veciguales[]=$vec[$f];
+  }
+}
+$xml="<?xml version=\"1.0\"?>\n";
+$xml.="<palabras>\n";
+if (isset($veciguales))
+{
+  for($f=0;$f<count($veciguales);$f++)
+  {
+    $xml.="<palabra>".$veciguales[$f]."</palabra>\n";
+  }
+}
+$xml.="</palabras>\n";
+header('Content-Type: text/xml');
+echo $xml;
+?>
