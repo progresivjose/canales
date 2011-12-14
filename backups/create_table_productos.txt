@@ -1,0 +1,51 @@
+--table: productos
+--DROP TABLE productos;
+
+CREATE TABLE productos
+(
+  idproducto serial NOT NULL,
+  nombre character varying(50),
+  precio numeric,
+  cantidad numeric,
+  cod_categoria numeric
+
+  CONSTRAINT id_producto PRIMARY KEY (idproducto),
+  CONSTRAINT id_categoria FOREING KEY (id_categoria) REFERENCES   categorias(idcategoria) MATCH SIMPLE,
+  ON UDPATE NO ACTION ON DELETE NO ACTION
+)
+WITH (OIDS=FALSE);
+ALTER TABLE productos OWNER TO postgres;
+
+
+--Index: "fki_idcategoria"
+
+--DROP INDEX "fki_idcategoria"
+
+CREATE INDEX "fki_idcategoria"
+   ON productos
+USING btree
+(id_categoria);
+
+INSERT INTO productos (idproducto, nombre, precio, cantidad, cod_categoria)
+    VALUES ('1', 'plancha', 150000, 100, 1);
+INSERT INTO productos (nombre, precio, cantidad, cod_categoria)
+    VALUES ('2', 'lavaropas', 1150000, 120, 2);
+INSERT INTO productos (nombre, precio, cantidad, cod_categoria)
+    VALUES ('3', 'cocina', 700000, 1456, 3);
+INSERT INTO productos (nombre, precio, cantidad, cod_categoria)
+    VALUES ('4', 'mixtera', 100000, 963, 4);
+INSERT INTO productos (nombre, precio, cantidad, cod_categoria)
+    VALUES ('5', 'lavaplatos', 1650000, 541, 5);
+INSERT INTO productos (nombre, precio, cantidad, cod_categoria)
+    VALUES ('6', 'aspiradora', 450000, 487, 1);
+INSERT INTO productos (nombre, precio, cantidad, cod_categoria)
+    VALUES ('7', 'secador', 350000, 100, 2);
+INSERT INTO productos (nombre, precio, cantidad, cod_categoria)
+    VALUES ('8', 'micro ondas', 650000, 45, 3);
+INSERT INTO productos (nombre, precio, cantidad, cod_categoria)
+    VALUES ('9', 'heladera', 1050000, 20, 4);
+INSERT INTO productos (nombre, precio, cantidad, cod_categoria)
+    VALUES ('10', 'aire acondicionado', 1500000, 30, 5);
+INSERT INTO productos (nombre, precio, cantidad, cod_categoria)
+    VALUES ('11', 'batidora', 150000, 80, 1);
+

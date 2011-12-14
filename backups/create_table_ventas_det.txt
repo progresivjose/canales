@@ -1,0 +1,42 @@
+--table: ventas_det
+--DROP TABLE ventas_det;
+
+CREATE TABLE ventas_det
+(
+  idcodop serial NOT NULL,
+  cod_usuario  numeric,
+  cod_venta	numeric,
+  cod_producto numeric,
+  precio       numeric,
+  fecha_venta  date
+
+  CONSTRAINT id_codop PRIMARY KEY (idcodop),
+  CONSTRAINT id_codusuario FOREING KEY (cod_usuario) REFERENCES   usuarios(idusuario) MATCH SIMPLE,
+  ON UDPATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT id_codventa FOREING KEY (cod_venta) REFERENCES   ventas_cab(idventa) MATCH SIMPLE,
+  ON UDPATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT id_codprodu FOREING KEY (cod_producto) REFERENCES   productos(idproducto) MATCH SIMPLE,
+  ON UDPATE NO ACTION ON DELETE NO ACTION
+)
+WITH (OIDS=FALSE);
+ALTER TABLE ventas_det OWNER TO postgres;
+
+
+INSERT INTO ventascab (idcodop , cod_venta, cod_usuario, cod_producto, precio, fecha_venta)
+    VALUES (1, 01, 1, 1, 13255, 16/12/2012);
+INSERT INTO ventascab (idcodop , cod_venta, cod_usuario, cod_producto, precio, fecha_venta)
+    VALUES (2, 03, 2, 1, 86789, 16/12/2012);
+INSERT INTO ventascab (idcodop , cod_venta, cod_usuario, cod_producto, precio, fecha_venta)
+    VALUES (3, 04, 4, 1, 12353, 16/12/2012);
+INSERT INTO ventascab (idcodop, cod_venta, cod_usuario, cod_producto, precio, fecha_venta)
+    VALUES (4, 05, 3, 1, 2345, 16/12/2012);
+INSERT INTO ventascab (idcodop , cod_venta, cod_usuario, cod_producto, precio, fecha_venta)
+    VALUES (5, 02, 2, 1, 4356435, 16/12/2012);
+INSERT INTO ventascab (idcodop , cod_venta, cod_usuario, cod_producto, precio, fecha_venta)
+    VALUES (6, 02, 5, 1, 677457, 16/12/2012);
+INSERT INTO ventascab (idcodop , cod_venta, cod_usuario, cod_producto, precio, fecha_venta)
+    VALUES (7, 01, 3, 1, 2345324, 16/12/2012);
+INSERT INTO ventascab (idcodop , cod_venta, cod_usuario, cod_producto, precio, fecha_venta)
+    VALUES (8, 03, 5, 1, 23452345, 16/12/2012);
+INSERT INTO ventascab (idcodop , cod_venta, cod_usuario, cod_producto, precio, fecha_venta)
+    VALUES (9, 05, 3, 1, 436436, 16/12/2012);

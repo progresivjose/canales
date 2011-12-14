@@ -1,0 +1,49 @@
+--table: ventas_cab
+--DROP TABLE ventas_cab;
+
+CREATE TABLE ventas_cab
+(
+  idventa serial NOT NULL,
+  cod_usuario  numeric,
+  total_Venta   numeric,
+  fecha_venta  date
+
+  CONSTRAINT id_venta PRIMARY KEY (idventa),
+  CONSTRAINT id_codusuario FOREING KEY (cod_usuario) REFERENCES   usuarios(idusuario) MATCH SIMPLE,
+
+)
+WITH (OIDS=FALSE);
+ALTER TABLE ventas_cab OWNER TO postgres;
+
+
+--Index: "fki_id_codusuario"
+
+--DROP INDEX "fki_id_codusuario"
+
+CREATE INDEX "fki_id_codusuario"
+   ON ventas_cab
+USING btree
+(id_codusuario);
+
+
+INSERT INTO ventascab (idventa, cod_usuario, total_Venta, fecha_venta)
+    VALUES (1, 01 , 1500000, 16/12/2012);
+INSERT INTO ventascab (idventa, cod_usuario, total_Venta, fecha_venta)
+    VALUES (2, 02 , 1500000, 16/12/2012);
+INSERT INTO ventascab (idventa, cod_usuario, total_Venta, fecha_venta)
+    VALUES (3, 05 , 1867876, 16/12/2012);
+INSERT INTO ventascab (idventa, cod_usuario, total_Venta, fecha_venta)
+    VALUES (4, 04 , 1554777, 16/12/2012);
+INSERT INTO ventascab (idventa, cod_usuario, total_Venta, fecha_venta)
+    VALUES (5, 05 , 1436512, 16/12/2012);
+INSERT INTO ventascab (idventa, cod_usuario, total_Venta, fecha_venta)
+    VALUES (6, 02 , 4564256, 16/12/2012);
+INSERT INTO ventascab (idventa, cod_usuario, total_Venta, fecha_venta)
+    VALUES (7, 05 , 3657653, 16/12/2012);
+INSERT INTO ventascab (idventa, cod_usuario, total_Venta, fecha_venta)
+    VALUES (8, 01 , 534553, 16/12/2012);
+INSERT INTO ventascab (idventa, cod_usuario, total_Venta, fecha_venta)
+    VALUES (9, 02 , 122000, 16/12/2012);
+INSERT INTO ventascab (idventa, cod_usuario, total_Venta, fecha_venta)
+    VALUES (10, 03 , 500000, 16/12/2012);
+

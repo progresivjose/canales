@@ -1,0 +1,33 @@
+--table: usuarios
+--DROP TABLE usuarios
+
+CREATE TABLE usuarios
+(
+  idusuario serial NOT NULL,
+  nombre character varying(50),
+  apellido character varying(50),
+  cedula character varying(50),
+  celular character varying(50),
+  id_tipo integer,
+  CONSTRAINT id_usuario PRIMARY KEY (idusuario),
+
+)
+WITH (OIDS=FALSE);
+ALTER TABLE usuarios OWNER TO postgres;
+
+
+
+INSERT INTO usuarios (idusuario, nombre, apellido, cedula, celular, id_tipo)
+    VALUES (01, 'juan', 'gonzalez', '124100', '0971606060', 1 );
+
+INSERT INTO usuarios (idusuario, nombre, apellido, cedula, celular, id_tipo)
+    VALUES (02, 'jose', 'lopez', '131244', '09735675', 1 );
+
+INSERT INTO usuarios (idusuario, nombre, apellido, cedula, celular, id_tipo)
+    VALUES (03, 'marco', 'jara', '124100', '0943756767', 1 );
+
+INSERT INTO usuarios (idusuario, nombre, apellido, cedula, celular, id_tipo)
+    VALUES (04, 'carlos', 'duarte', '32452345', '095678567', 1 );
+
+INSERT INTO usuarios (idusuario, nombre, apellido, cedula, celular, id_tipo)
+    VALUES (05, 'pedro', 'perez', '5345134|', '092143645', 0 );

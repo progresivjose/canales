@@ -1,0 +1,30 @@
+--table: categorias
+--DROP TABLE categorias;
+
+CREATE TABLE categorias
+(
+  idcategoria serial NOT NULL,
+  nombre character varying(50),
+  
+  CONSTRAINT id_categoria PRIMARY KEY (idcategoria),
+ 
+)
+WITH (OIDS=FALSE);
+ALTER TABLE categorias OWNER TO postgres;
+
+
+INSERT INTO categorias (idcategoria, nombre)
+   VALUES (1, 'casa');
+
+INSERT INTO categorias (idcategoria, nombre)
+   VALUES (2, 'general');
+
+INSERT INTO categorias (idcategoria, nombre)
+   VALUES (3, 'electrodomestico');
+
+INSERT INTO categorias (idcategoria, nombre)
+   VALUES (4, 'campo');
+
+INSERT INTO categorias (idcategoria, nombre)
+   VALUES (5, 'jardin');
+
