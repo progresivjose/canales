@@ -3,12 +3,10 @@ include 'php/conexion.class.php';
 include 'php/sesion.php';
 
 if (isset($_GET['id']) and !empty($_GET['id']) and $_GET['id'] != 0) {
-    $categoriaid = $_GET['id'];
-    //seleccionar la categoria
-    $categoria = $conexion->fetchRow($conexion->ejecutarSQL("select * from categorias where idcategoria = '$categoriaid'"));
-    //seleccionar todos los productos
-    $sql = "select * from productos where id_categoria = '$categoriaid'";
-    $productos = $conexion->ejecutarSQL($sql);
+    $productoid = $_GET['id'];
+    //seleccionar el producto
+    $sql = "select * from productos where idproducto = '$productoid'";
+    $producto = $conexion->fetchRow($conexion->ejecutarSQL($sql));
 } else {
     header('Location: index.php');
 }
@@ -20,13 +18,32 @@ if (isset($_GET['id']) and !empty($_GET['id']) and $_GET['id'] != 0) {
         <meta name="description" content="" />
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <title>CANALES S.A.</title>
-        <link rel="stylesheet" href="css/jquery.lightbox-0.5.css" type="text/css" media="screen" />
+        <!--        <link rel="stylesheet" href="css/jquery.lightbox-0.5.css" type="text/css" media="screen" />-->
+        <link rel="stylesheet" href="css/shadowbox.css" type="text/css" media="screen" />
         <link rel="stylesheet" href="css/style.css" type="text/css"   />
         <script type="text/javascript" src="js/jquery-1.6.1.js"></script>
         <script type="text/javascript" src="js/corner.js"></script>
+<!--        <script type="text/javascript" src="js/jquery.lightbox-0.5.js"></script>-->
         <script type="text/javascript"  src="js/funciones.js"></script>
         <script type="text/javascript" src="js/contador.js"></script>
+        <script type="text/javascript" src="js/shadowbox.js"></script>
+        <script type="text/javascript">
+            Shadowbox.init({
+                language:   "es",
+                players:    ["img", "iframe"]
+            });
+            function mostrar_producto(id) {
+                // open a welcome message as soon as the window loads
+                Shadowbox.open({
+                    content:    URL='ver_producto.php?id='+id,
+                    player:     "iframe",
+                    title:      "Ver Producto",
+                    height:     400,
+                    width:      400
+                });
 
+            };
+        </script>
     </head>
     <body onload="fecha(), lista_productos(), menu_horizontal()">
         <div id="header">
@@ -64,29 +81,15 @@ if (isset($_GET['id']) and !empty($_GET['id']) and $_GET['id'] != 0) {
 
             <div id="content">
                 <div class="post">
-                    <h2 class="title"><a href="#"><?php echo $categoria['nombre'] ?></a></h2>
-                    <div style="clear: both;">
-                        <p>En esta categoría encontrará productos para el hogar para su uso en la vida cotidiana en ella encontrara una gran variedad de articulos  de nueva tecnología.
-                        </p>
-                        <p>&nbsp;</p>
+                    <h2 class="title"><a href="#"><?php echo $producto['nombre'] ?></a></h2>
+                    <div style="clear: both;"></div>
+                    <div class="img" style="width: 289px; float: left">
+                        <img src="images/productos/<?php echo $producto['imagen'] ?>" style="width: 289px;"/>
                     </div>
-                    <div class="entry">
-                        <div id="gallery">
-                            <ul>
-                                <?php
-                                if ($conexion->numRows($productos) > 0) {
-                                    while ($producto = $conexion->fetchRow($productos)) {
-                                        ?>
-                                        <li>
-                                            <a href="ver_producto.php?id=<?php echo $producto['idproducto']?>" id="hogar_1" >
-                                                <img src="images/productos/<?php echo $producto['imagen'] ?>" width="72" height="72" alt="" />
-                                            </a>
-                                        </li>
-                                    <?php }
-                                } ?>
-                            </ul>
-                        </div>
-
+                    <div class="descripcion">
+                        <p><?php echo $producto['descripcion']?></p>
+                        <input type="button" value="Volver" onclick="javascript: window.history.back();"/>
+                        <input type="button" value="Comprar" />
                     </div>
                     <p>&nbsp;</p>
                 </div>

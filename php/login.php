@@ -1,5 +1,5 @@
 <?php
-if(!isset($session_id)){ 
+if(!isset($user)){ 
 ?>
 <form method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
     <label for="user">Usuario</label>
@@ -9,7 +9,7 @@ if(!isset($session_id)){
     <input type="submit" value="Ingresar"/>
 </form>
 <?php }else{
-    echo "Bienvenido " . $session_nombre . " ";
+    echo "Bienvenido " . $user->get_nombre() . " " . $user->get_apellido() . " ";
 ?>
 <a href="<?php echo $_SERVER['PHP_SELF']?>?logout=1">Salir</a>
     <?php

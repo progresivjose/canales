@@ -1,14 +1,22 @@
 <?php
 
-class usuarios{
+class usuario{
     private $id;
     private $nombre;
+    private $apellido;
+    private $cedula;
+    private $celular;
     private $tipo;
+    private $usuario;
     private $productos = array();
     
-    function __construct($id, $nombre, $tipo){
+    function __construct($id, $nombre, $apellido,$cedula, $celular, $usuario,$tipo){
         $this->id = $id;
         $this->nombre = $nombre;
+        $this->apellido = $apellido;
+        $this->cedula = $cedula;
+        $this->celular = $celular;
+        $this->usuario = $usuario;
         $this->tipo = $tipo;
     }
     
@@ -37,6 +45,10 @@ class usuarios{
         return $this->nombre;
     }
     
+    function get_apellido(){
+        return $this->apellido;
+    }
+    
     function get_tipo(){
         return $this->tipo;
     }
@@ -48,5 +60,6 @@ class usuarios{
     function get_productos(){
         return $this->productos;
     }
+    
 }
 ?>

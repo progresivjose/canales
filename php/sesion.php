@@ -1,5 +1,5 @@
 <?php
-
+include 'php/usuario.class.php';
 
 
 session_start();
@@ -17,8 +17,8 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
         $_SESSION['user']['tipo'] = $usuario['id_tipo'];
         $_SESSION['user']['nombre'] = $usuario['nombre'];
         $_SESSION['user']['apellido'] = $usuario['apellido'];
-        
-        
+        $_SESSION['user']['cedula'] = $usuario['apellido'];
+        $_SESSION['user']['celular'] = $usuario['apellido'];
     }
 }
 
@@ -27,10 +27,14 @@ if (isset($_GET['logout']) and $_GET['logout'] == 1) {
 }
 
 if (isset($_SESSION['user'])) {
-    $session_user = $_SESSION['user']['usuario'];
-    $session_id = $_SESSION['user']['id'];
-    $session_tipo = $_SESSION['user']['tipo'];
-    $session_nombre = $_SESSION['user']['nombre'];
-    $session_apellido = $_SESSION['user']['apellido'];
+    $usuario = $_SESSION['user']['usuario'];
+    $usuarioid = $_SESSION['user']['id'];
+    $tipo = $_SESSION['user']['tipo'];
+    $nombre = $_SESSION['user']['nombre'];
+    $apellido = $_SESSION['user']['apellido'];
+    $cedula = $_SESSION['user']['cedula'];
+    $celular = $_SESSION['user']['celular'];
+    
+    $user = new usuario($usuarioid, $nombre, $apellido, $cedula, $celular, $usuario, $tipo);
 }
 ?>
