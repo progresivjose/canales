@@ -1,5 +1,7 @@
 <?php
+include 'php/base.class.php';
 include 'php/usuario.class.php';
+include 'php/venta.class.php';
 
 
 session_start();
@@ -24,6 +26,7 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
 
 if (isset($_GET['logout']) and $_GET['logout'] == 1) {
     unset($_SESSION['user']);
+    unset($_SESSION['venta']);
 }
 
 if (isset($_SESSION['user'])) {
@@ -36,5 +39,9 @@ if (isset($_SESSION['user'])) {
     $celular = $_SESSION['user']['celular'];
     
     $user = new usuario($usuarioid, $nombre, $apellido, $cedula, $celular, $usuario, $tipo);
+}
+
+if(isset($_SESSION['venta'])){
+    $venta = $_SESSION['venta'];
 }
 ?>

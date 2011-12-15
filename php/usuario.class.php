@@ -1,6 +1,6 @@
 <?php
 
-class usuario{
+class usuario extends base{
     private $id;
     private $nombre;
     private $apellido;

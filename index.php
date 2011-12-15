@@ -1,4 +1,4 @@
-<?php 
+<?php
 include 'php/conexion.class.php';
 include 'php/sesion.php';
 ?>
@@ -17,6 +17,11 @@ include 'php/sesion.php';
         <script type="text/javascript" src="js/jquery.lightbox-0.5.js"></script>
         <script type="text/javascript"  src="js/funciones.js"></script>
         <script type="text/javascript" src="js/contador.js"></script>
+        <script type="text/javascript">
+<?php if (isset($_GET['msg']) and $_GET['msg'] == 1) { ?>
+    alert('Para realizar una compra debe iniciar sesion');
+    <?php } ?>    
+        </script>
     </head>
     <body onload="fecha(), lista_productos(), menu_horizontal()">
         <div id="header">
@@ -31,11 +36,11 @@ include 'php/sesion.php';
                                         <li><a href="#">Forma de Pago</a></li>
                                         <li><a href="#">Contactos</a></li>
                                 </ul>-->
-                
+
             </div>
             <!-- end #menu -->
             <div id="login">
-                <?php include "php/login.php";?>
+<?php include "php/login.php"; ?>
             </div>
 
             <!--  NO SE USA 
@@ -57,7 +62,7 @@ include 'php/sesion.php';
             </div>
 
             <!-- end #content -->
-            <div id="sidebar"><?php include "php/sidebar.php";?></div>
+            <div id="sidebar"><?php include "php/sidebar.php"; ?></div>
             <!-- end #sidebar -->
             <div style="clear: both;">&nbsp;</div>
         </div>

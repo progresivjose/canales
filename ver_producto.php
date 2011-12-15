@@ -88,8 +88,13 @@ if (isset($_GET['id']) and !empty($_GET['id']) and $_GET['id'] != 0) {
                     </div>
                     <div class="descripcion">
                         <p><?php echo $producto['descripcion']?></p>
+                        <form action="carrito.php" method="post">
+                            <label for="cantidad">Cantidad</label>
+                        <input type="text" id="cantidad" name="cantidad" value="1"/>
                         <input type="button" value="Volver" onclick="javascript: window.history.back();"/>
-                        <input type="button" value="Comprar" />
+                        <input type="submit" value="Comprar"/>
+                        <input type="hidden" name="productoid" value="<?php echo $producto['idproducto']?>"/>
+                        </form>
                     </div>
                     <p>&nbsp;</p>
                 </div>
