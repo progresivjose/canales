@@ -57,9 +57,7 @@ include 'php/sesion.php';
             </div>
 
             <!-- end #content -->
-            <div id="sidebar">
-
-                Este espacio es reemplazado por el script </div>
+            <div id="sidebar"><?php include "php/sidebar.php";?></div>
             <!-- end #sidebar -->
             <div style="clear: both;">&nbsp;</div>
         </div>
