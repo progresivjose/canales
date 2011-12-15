@@ -6,7 +6,7 @@ class usuarios{
     private $tipo;
     private $productos = array();
     
-    function __contruct($id, $nombre, $tipo){
+    function __construct($id, $nombre, $tipo){
         $this->id = $id;
         $this->nombre = $nombre;
         $this->tipo = $tipo;
