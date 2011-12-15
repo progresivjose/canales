@@ -1,6 +1,17 @@
 <?php
 include 'php/conexion.class.php';
 include 'php/sesion.php';
+
+if (isset($_GET['id']) and !empty($_GET['id']) and $_GET['id'] != 0) {
+    $categoriaid = $_GET['id'];
+    //seleccionar la categoria
+    $categoria = $conexion->fetchRow($conexion->ejecutarSQL("select * from categorias where idcategoria = '$categoriaid'"));
+    //seleccionar todos los productos
+    $sql = "select * from productos where id_categoria = '$categoriaid'";
+    $productos = $conexion->ejecutarSQL($sql);
+} else {
+    header('Location: index.php');
+}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -35,7 +46,7 @@ include 'php/sesion.php';
             <!-- end #menu -->
 
             <div id="login">
-                <?php include "php/login.php"; ?>
+<?php include "php/login.php"; ?>
             </div>
 
             <!--  NO SE USA 
@@ -53,7 +64,7 @@ include 'php/sesion.php';
 
             <div id="content">
                 <div class="post">
-                    <h2 class="title"><a href="#"> Hogar</a></h2>
+                    <h2 class="title"><a href="#"><?php echo $categoria['nombre']?></a></h2>
                     <div style="clear: both;">
                         <p>En esta categoría encontrará productos para el hogar para su uso en la vida cotidiana en ella encontrara una gran variedad de articulos  de nueva tecnología.
                         </p>
@@ -62,46 +73,20 @@ include 'php/sesion.php';
                     <div class="entry">
                         <div id="gallery">
                             <ul>
-                                <li>
-                                    <a href="images/hogar_1.jpg" id="hogar_1" onclick="calcular_cuotas(5000,this.id);" title="Descripcion:Capacidad 2kg de aceite, 1 Kg de comida. Bowl antiaderente timer y termostato ajustable.
-                                       &lt;br \/&gt; &lt;br \/&gt;
-                                       &lt;strong&gt;Nombre del Producto:&lt;/strong&gt;Televisor &lt;br \/&gt;
-                                       &lt;strong&gt;Codigo: &lt;/strong&gt; Hogar_1">
-                                        <img src="images/hogar_1_tb.jpg" width="72" height="72" alt="" />
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="images/hogar_2.jpg" id="hogar_2" onclick="calcular_cuotas(10000,this.id);"  title="Descripcion: Cap: 2,5 lt. 5000w de potencia, tapa de vidrio, funcion mantener caliente. Descong rapido..
-                                       &lt;br \/&gt; &lt;br \/&gt;
-                                       &lt;strong&gt;Nombre del Producto:&lt;/strong&gt;Televisor &lt;br \/&gt;
-                                       &lt;strong&gt;Codigo: &lt;/strong&gt; Hogar_1">
-                                        <img src="images/hogar_2_tb.jpg" width="72" height="72" alt="" />
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="images/hogar_3.jpg" id="hogar_3" onclick="calcular_cuotas(15000,this.id);"  title="Descripcion: 2 tamaños de pann c/programa diferido 750grs. o 1 Kg., 10 prog. diferentes, 3 niveles de dorado, panle electronico
-                                       &lt;br \/&gt; &lt;br \/&gt;
-                                       &lt;strong&gt;Nombre del Producto:&lt;/strong&gt;Televisor &lt;br \/&gt;
-                                       &lt;strong&gt;Codigo: &lt;/strong&gt; Hogar_1">
-                                        <img src="images/hogar_3_tb.jpg" width="72" height="72" alt="" />
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="images/hogar_4.jpg" id="hogar_4" onclick="calcular_cuotas(20000,this.id);"  title="Descripcion: Cap.: 1,7 lts. indicador luminoso On/Off, 360º de rotacion de base, 2200w
-                                       &lt;br \/&gt; &lt;br \/&gt;
-                                       &lt;strong&gt;Nombre del Producto:&lt;/strong&gt;Televisor &lt;br \/&gt;
-                                       &lt;strong&gt;Codigo: &lt;/strong&gt; Hogar_1">
-                                        <img src="images/hogar_4_tb.jpg" width="72" height="72" alt="" />
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="images/hogar_5.jpg"  id="hogar_5" onclick="calcular_cuotas(25000,this.id);"  title="Descripcion: Suela Ultragliss, deposito de agua 200ml, vapor vertical, 1740w
-                                       &lt;br \/&gt; &lt;br \/&gt;
-                                       &lt;strong&gt;Nombre del Producto:&lt;/strong&gt;Televisor &lt;br \/&gt;
-                                       &lt;strong&gt;Codigo: &lt;/strong&gt; Hogar_1">
-                                        <img src="images/hogar_5_tb.jpg" width="72" height="72" alt="" />
-                                    </a>
-                                </li>
+<?php
+if ($conexion->numRows($productos) > 0) {
+    while ($producto = $conexion->fetchRow($productos)) {
+        ?>
+                                        <li>
+                                            <a href="images/productos/<?php echo $producto['imagen']?>" id="hogar_1" onclick="calcular_cuotas(5000,this.id);" title="Descripcion:Capacidad 2kg de aceite, 1 Kg de comida. Bowl antiaderente timer y termostato ajustable.
+                                               &lt;br \/&gt; &lt;br \/&gt;
+                                               &lt;strong&gt;Nombre del Producto:&lt;/strong&gt;Televisor &lt;br \/&gt;
+                                               &lt;strong&gt;Codigo: &lt;/strong&gt; Hogar_1">
+                                                <img src="images/productos/<?php echo $producto['imagen']?>" width="72" height="72" alt="" />
+                                            </a>
+                                        </li>
+                                    <?php }
+                                } ?>
                             </ul>
                         </div>
 
@@ -113,7 +98,7 @@ include 'php/sesion.php';
             </div>
 
             <!-- end #content -->
-            <div id="sidebar"><?php include "php/sidebar.php";?></div>
+            <div id="sidebar"><?php include "php/sidebar.php"; ?></div>
             <!-- end #sidebar -->
             <div style="clear: both;">&nbsp;</div>
         </div>
