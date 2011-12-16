@@ -90,15 +90,7 @@ if (isset($_POST['productoid'])) {
 
         <!-- end #header -->
         <div id="wrapper"> 
-            <div id="menu">
-                <!--		<ul>
-                                        <li class="current_page_item"><a href="#">Principal</a></li>
-                                        <li><a href="#">Empresa</a></li>
-                                        <li><a href="#">Forma de Pago</a></li>
-                                        <li><a href="#">Contactos</a></li>
-                                </ul>-->
-
-            </div>
+            <div id="menu"><?php include "php/menu.php"?></div>
             <!-- end #menu -->
             <div id="login">
                 <?php include "php/login.php"; ?>
