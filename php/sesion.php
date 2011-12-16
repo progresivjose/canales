@@ -7,10 +7,10 @@ include 'php/venta.class.php';
 session_start();
 
 if (isset($_POST['user']) && isset($_POST['pass'])) {
-    $user = $_POST['user'];
+    $user_post = $_POST['user'];
     $pass = $_POST['pass'];
 
-    $sql = "select * from usuarios where usuario = '$user' and password = '$pass'";
+    $sql = "select * from usuarios where usuario = '$user_post' and password = '$pass'";
     $usuarios = $conexion->ejecutarSQL($sql);
     if ($conexion->numRows($usuarios) > 0) {
         $usuario = $conexion->fetchRow($usuarios);
@@ -21,6 +21,8 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
         $_SESSION['user']['apellido'] = $usuario['apellido'];
         $_SESSION['user']['cedula'] = $usuario['cedula'];
         $_SESSION['user']['celular'] = $usuario['celular'];
+    }else{
+        $msg = "Usuario o Contrasenha invalido";
     }
 }
 
