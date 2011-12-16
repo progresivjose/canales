@@ -2,11 +2,18 @@
 if(!isset($user)){ 
 ?>
 <form method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
-    <label for="user">Usuario</label>
-    <input type="text" value="" name="user" id="user"/>
-    <label for="pass">Contrase&ntilde;a</label>
-    <input type="password" value="" name="pass" id="pass"/>
-    <input type="submit" value="Ingresar"/>
+    <table>
+        <tr>
+    <td><label for="user">Usuario</label></td>
+    <td><input type="text" value="" name="user" id="user" class="input"/></td>
+    <td><input type="submit" value="Ok"/></td>
+    </tr>
+    <tr>
+    <td><label for="pass">Contrase&ntilde;a</label></td>
+    <td><input type="password" value="" name="pass" id="pass" class="input"/></td>
+    </tr>
+
+    </table>
 </form>
 <?php }else{
     echo "Bienvenido " . $user->get_nombre() . " " . $user->get_apellido() . " ";

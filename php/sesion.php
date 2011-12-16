@@ -19,14 +19,15 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
         $_SESSION['user']['tipo'] = $usuario['id_tipo'];
         $_SESSION['user']['nombre'] = $usuario['nombre'];
         $_SESSION['user']['apellido'] = $usuario['apellido'];
-        $_SESSION['user']['cedula'] = $usuario['apellido'];
-        $_SESSION['user']['celular'] = $usuario['apellido'];
+        $_SESSION['user']['cedula'] = $usuario['cedula'];
+        $_SESSION['user']['celular'] = $usuario['celular'];
     }
 }
 
 if (isset($_GET['logout']) and $_GET['logout'] == 1) {
     unset($_SESSION['user']);
     unset($_SESSION['venta']);
+    header("Location: index.php");
 }
 
 if (isset($_SESSION['user'])) {

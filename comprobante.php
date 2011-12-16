@@ -1,6 +1,11 @@
 <?php
 include 'php/conexion.class.php';
 include 'php/sesion.php';
+
+if(isset($_GET['ventaid'])){
+    $ventaid = $_GET['ventaid'];
+    $venta_sql = $conexion->fetchRow($conexion->ejecutarSQL("select * from ventas where idventa = '$ventaid'"));
+    }
 ?>
 <html>
     <head>

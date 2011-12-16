@@ -1,6 +1,8 @@
 <?php
 include 'php/conexion.class.php';
 include 'php/sesion.php';
+
+$ventas = $conexion->ejecutarSQL("select *, to_char(fecha_venta, 'DD/MM/YYYY') as fecha from ventas_cab where cod_usuario = {$user->get_id()} order by fecha_venta desc");
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -19,8 +21,8 @@ include 'php/sesion.php';
         <script type="text/javascript" src="js/contador.js"></script>
         <script type="text/javascript">
 <?php if (isset($_GET['msg']) and $_GET['msg'] == 1) { ?>
-    alert('Para realizar una compra debe iniciar sesion');
-    <?php } ?>    
+        alert('Para realizar una compra debe iniciar sesion');
+<?php } ?>    
         </script>
     </head>
     <body onload="fecha(), lista_productos(), menu_horizontal()">
@@ -29,27 +31,39 @@ include 'php/sesion.php';
 
         <!-- end #header -->
         <div id="wrapper"> 
-            <div id="menu"><?php include "php/menu.php"?></div>
+            <div id="menu"><?php include "php/menu.php" ?></div>
             <!-- end #menu -->
             <div id="login">
-<?php include "php/login.php"; ?>
+                <?php include "php/login.php"; ?>
             </div>
 
-            <!--  NO SE USA 
-             <div id="search" >
-                           <form method="get" action="#">
-                                   <div>
-                                           <input type="text" name="s" id="search-text" value="" />
-                                   </div>
-                           </form>
-             </div>-->
         </div>
         <div id="page">
 
             <div id="fecha">Fecha actual</div>
 
             <div id="content">
-                <img src="images/promo_1.jpg" alt="Klematis" width="550" height="550" />
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Codigo Compra</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if ($conexion->numRows($ventas) > 0) {
+                            while ($venta = $conexion->fetchRow($ventas)) { ?>
+                                <tr>
+                                    <td><?php echo $venta['fecha']?></td>
+                                    <td style="text-align: center;"><?php echo $venta['idventa']?></td>
+                                    <td><a href="ver_detalle.php?ventaid=<?php echo $venta['idventa']?>" target="_blank">Ver Detalle</a></td>
+                                </tr>
+                            <?php }
+                        } ?>
+                    </tbody>
+
+                </table>
                 <div style="clear: both;">&nbsp;</div>
             </div>
 
@@ -61,12 +75,7 @@ include 'php/sesion.php';
 
         <!-- end #page -->
         <div id="footer-menu">
-            <!--	<ul>
-                            <li class="current_page_item"><a href="#">Principal</a></li>
-                                    <li><a href="#">Empresa</a></li>
-                                    <li><a href="#">Forma de Pago</a></li>
-                                    <li><a href="#">Contactos</a></li>
-                    </ul>--> 
+
         </div>
         <div id="footer">
             <p>España 904 esq TTe Benitez Telefax:585-489/ 591 -585 ventas@canales.com.py</p>

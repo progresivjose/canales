@@ -71,7 +71,7 @@ function menu_horizontal ()	//para el menu horizontal y el pie de pagina
     "<li><a href='forma_pago.html'>Forma de Pago<\/a><\/li>"+
     "<li><a href='contactos.html'>Contactos<\/a><\/li><\/ul>";
  
-    document.getElementById('menu').innerHTML=menu_principal;
+    //document.getElementById('menu').innerHTML=menu_principal;
     document.getElementById('footer-menu').innerHTML=menu_principal;
 }
 

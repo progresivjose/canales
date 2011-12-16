@@ -53,6 +53,18 @@ class usuario extends base{
         return $this->tipo;
     }
     
+    function get_usuario(){
+        return $this->usuario;
+    }
+    
+    function get_cedula(){
+        return $this->cedula;
+    }
+    
+    function get_celular(){
+        return $this->celular;
+    }
+    
     
     /*
      * Obtiene todos los productos en un array

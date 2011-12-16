@@ -35,21 +35,38 @@ include 'php/sesion.php';
 <?php include "php/login.php"; ?>
             </div>
 
-            <!--  NO SE USA 
-             <div id="search" >
-                           <form method="get" action="#">
-                                   <div>
-                                           <input type="text" name="s" id="search-text" value="" />
-                                   </div>
-                           </form>
-             </div>-->
         </div>
         <div id="page">
 
             <div id="fecha">Fecha actual</div>
 
             <div id="content">
-                <img src="images/promo_1.jpg" alt="Klematis" width="550" height="550" />
+                <table>
+                    <tr>
+                        <td>Usuario</td>
+                        <td><?php echo $user->get_usuario()?></td>
+                    </tr>
+                    <tr>
+                        <td>Nombre</td>
+                        <td><?php echo $user->get_nombre()?></td>
+                    </tr>
+                    <tr>
+                        <td>Apellido</td>
+                        <td><?php echo $user->get_apellido()?></td>
+                    </tr>
+                    <tr>
+                        <td>Cedula</td>
+                        <td><?php echo $user->get_cedula()?></td>
+                    </tr>
+                    <tr>
+                        <td>Celular</td>
+                        <td><?php echo $user->get_celular()?></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><a href="ver_compras.php">Ver Compras</a></td>
+                    </tr>
+                </table>
                 <div style="clear: both;">&nbsp;</div>
             </div>
 
@@ -61,12 +78,7 @@ include 'php/sesion.php';
 
         <!-- end #page -->
         <div id="footer-menu">
-            <!--	<ul>
-                            <li class="current_page_item"><a href="#">Principal</a></li>
-                                    <li><a href="#">Empresa</a></li>
-                                    <li><a href="#">Forma de Pago</a></li>
-                                    <li><a href="#">Contactos</a></li>
-                    </ul>--> 
+
         </div>
         <div id="footer">
             <p>España 904 esq TTe Benitez Telefax:585-489/ 591 -585 ventas@canales.com.py</p>
